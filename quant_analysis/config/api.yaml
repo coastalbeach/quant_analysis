@@ -1,0 +1,34 @@
+# 第三方数据源API配置
+
+# AKShare配置
+akshare:
+  # AKShare不需要token，此处预留配置接口
+  token: ""
+  rate_limit: 100 # 每秒请求次数限制
+
+# Tushare配置
+tushare:
+  token: "YOUR_TUSHARE_TOKEN"
+  rate_limit: 5
+  timeout: 10
+
+# 其他数据源配置
+other_sources:
+  # 预留其他数据源配置
+  custom_source:
+    api_key: "YOUR_API_KEY"
+    secret_key: "YOUR_SECRET_KEY"
+    base_url: "https://api.example.com"
+    timeout: 30
+
+# 代理配置
+proxy:
+  enabled: false
+  http: "http://127.0.0.1:7890"
+  https: "http://127.0.0.1:7890"
+
+# 重试配置
+retry:
+  max_retries: 2 #最大重试次数
+  retry_delay: 0.5 #重试间隔（秒）
+  backoff_factor: 2  # 重试延迟倍数

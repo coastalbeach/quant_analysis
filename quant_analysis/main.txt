@@ -1,0 +1,47 @@
+quant_analysis/
+├── core/                  # 核心功能模块
+│   ├── data/              # 数据管理模块（按数据类型分类）
+│   │   ├── fetcher/       # 数据获取分类
+│   │   │   ├── daily/     # 日频数据接口（严格日度更新数据）
+│   │   │   ├── hist/      # 历史数据接口（日度更新最新数据）
+│   │   │   ├── realtime/  # 实时/分时数据接口（如实时行情）
+│   │   │   ├── stock_bisic.py     # 基础数据接口（如股票列表、行业分类）
+│   │   │   └── custom/    # 自定义数据源（预留扩展）
+│   ├── storage.py     # 数据存储统一接口（自动存入PostgreSQL）
+│   └── cache.py       # Redis缓存管理（仅缓存高频查询数据）
+│   │
+│   ├── indicators/        # 指标模块（仅技术指标）
+│   │   ├── ta.py          # TA-Lib封装（MACD、RSI等经典指标）
+│   │   ├── custom.py      # 用户自定义指标（如合成波动率）
+│   │   └── utils.py       # 指标计算工具（数据对齐、异常处理）
+│   │
+│   ├── strategy/          # 策略模块（分层设计）
+│   │   ├── base/          # 基础策略库（动量、均值回归等）
+│   │   ├── composite/     # 复合策略（基于基础策略组合）
+│   │   ├── backtest/      # 回测框架（集成Backtrader）
+│   │   └── signals.py     # 信号生成与存储
+│   │
+│   └── utils/             # 工具模块（仅封装必要功能）
+│       ├── logs.py        # 日志配置（直接调用logging库）
+│       └── tasks.py       # 定时任务（基于APScheduler封装）
+│
+├── gui/                   # 可视化界面（PyQt6）
+│   ├── main_window.py     # 主窗口（集成数据、策略、回测视图）
+│   ├── data_view/         # 数据展示组件（K线、热力图、表格）
+│   ├── strategy_editor/   # 策略编辑器（拖拽式配置复合策略）
+│   └── widgets/           # 复用组件（数据筛选器、指标选择器）
+│
+├── config/                # 配置文件
+│   ├── db.yaml           # 数据库与缓存配置
+│   ├── paths.yaml        # 路径管理（数据存储、日志目录）
+│   └── strategies/       # 策略配置文件（JSON/YAML）
+│
+├── scripts/              # 辅助脚本
+│   ├── init_db.py        # 数据库表初始化（按数据分类建表）
+│   └── run_pipeline.py   # 数据更新流水线（定时任务入口）
+│
+├── plugins/              # 插件扩展（可选）
+│   ├── data_sources/     # 额外数据源（如Tushare）
+│   └── strategies/       # 用户贡献策略
+│
+└── requirements.txt      # 依赖库（akshare, pandas, backtrader, APScheduler等）
